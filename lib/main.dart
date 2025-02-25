@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:netflix/screens/splash_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'homescreen.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure proper initialization
 
-void main() {
+  await Hive.initFlutter(); // Initialize Hive
+  await Hive.openBox('contacts'); // Open the contacts box only once
+
   runApp(MyApp());
 }
 
@@ -11,11 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MovieApp',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }
